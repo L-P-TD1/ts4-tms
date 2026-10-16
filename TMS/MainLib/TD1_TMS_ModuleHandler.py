@@ -6,23 +6,38 @@ TwelfthDoctor1's Teleport Memory System
 
 (C) Copyright TD1 & TWoCC 2020 - 2021
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Licensed under CC-BY-NC-ND 4.0
+Licensed under MIT License
 
-https://creativecommons.org/licenses/by-nc-nd/4.0/
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 Codes from other parties are not part of the License and Copyright.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 import webbrowser
 import services
+from TMS.CoreLib.TD1_TMS_Decorator import to_decorate
 from TMS.MainLib.TD1_TMS_Config import get_option_value
 from distributor.shared_messages import IconInfoData
 from sims4.collections import make_immutable_slots_class
 from sims4.common import Pack
 from sims4.localization import LocalizationHelperTuning, _create_localized_string
 from sims4.resources import Types, get_resource_key
-from sims4.tuning.tunable import TunableReference, Tunable, TunableList, TunableTuple, TunableEnumEntry
-from TMS.MainLib import injector
+from sims4.tuning.tunable import TunableReference, Tunable, TunableEnumEntry
 from sims.sim_info_manager import SimInfoManager
 from sims.sim_info_types import Species
 from ui.ui_dialog import ButtonType, UiDialogResponse
@@ -452,7 +467,7 @@ def td1_patreon(_connection=None):
 
 # Inject On Load Complete
 
-@injector.inject_to(SimInfoManager, 'on_loading_screen_animation_finished')
+@to_decorate(SimInfoManager, 'on_loading_screen_animation_finished')
 def td1_tms_add_tms_traits_to_sim_on_load(original, self, *args, **kwargs):
     result = original(self, *args, **kwargs)
 
